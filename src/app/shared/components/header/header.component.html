@@ -1,31 +1,334 @@
-<div class="dark left-0 top-0 block h-[85px] w-screen flex-row items-center justify-center border-b border-t border-gray-800  bg-gray-900 text-gray-200 md:flex">
-    <header class="w-screen-xl flex h-full w-full flex-row  items-center justify-between px-8 text-center">
-        <a href="/" aria-label="home" class="expand flex flex-row items-center gap-[12px]"><svg class="home-logo" viewBox="0 0 273 226" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="232" width="41" height="226" rx="20" fill="#4CC9F0"/>
-            <rect x="174" y="34" width="41" height="192" rx="20" fill="#4361EE"/>
-            <rect x="116" y="95" width="41" height="131" rx="20" fill="#3A0CA3"/>
-            <rect x="58" y="135" width="41" height="91" rx="20" fill="#7209B7"/>
-            <rect y="179" width="41" height="47" rx="20" fill="#F72585"/>
-            </svg>
-            
+ <header class="site-header site-header--transparent site-header--sticky">
+  <div class="container">
+    <nav class="navbar site-navbar">
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~
+        Brand Logo
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <div class="brand-logo">
+        <a href="#">
+          <!-- light version logo (logo must be black)-->
+          <img class="logo-light" src="../../../../assets/images/logo2.png" alt="brand logo">
+          <!-- Dark version logo (logo must be White)-->
+          <img class="logo-dark" src="./image/logo-2.png" alt="brand logo">
         </a>
-
-        <div id="default-slider-menu-open" class="inline cursor-pointer dark:bg-gray-900"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-10 w-10 rounded border border-gray-200 p-1 dark:border-gray-700 sm:hidden">
-            <path fill-rule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clip-rule="evenodd"></path></svg></div>
-        <div id="default-slider-menu-menu" class="fixed left-0 top-0 z-10 h-screen w-full select-none overflow-y-scroll bg-gray-50 text-gray-700 dark:bg-gray-900 dark:text-gray-200" style="transform:translate(0px, -110vh);transition-duration:0.3s;transition-timing-function:ease-in-out">
-            <div class="flex h-[var(--navbar-height)] w-full flex-row items-center justify-start border-b border-gray-200 px-[16px] py-[24px] text-lg dark:border-gray-700">
-                <div id="default-slider-menu-close" class="margin-auto cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-10 w-10 rounded border border-gray-200 p-1 dark:border-gray-700 "><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd"></path></svg></div>
-            </div>
-            <ul class="m-auto flex w-full list-none flex-col items-center justify-center gap-8 whitespace-nowrap text-lg font-bold sm:hidden"><img alt="Bun" class="max-w-[55px] py-[20px]" src="data:image/svg+xml;base64, ++++++++++==">
-                <div class="flex w-full flex-row flex-wrap justify-center gap-2 px-6"><a class="block w-full rounded-lg border border-gray-300 bg-gray-100 px-6 py-4 text-center text-lg font-medium hover:no-underline dark:border-gray-700 dark:bg-gray-800 sm:w-[140px] " href="/docs">Docs</a><a class="block w-full rounded-lg border border-gray-300 bg-gray-100 px-6 py-4 text-center text-lg font-medium hover:no-underline dark:border-gray-700 dark:bg-gray-800 sm:w-[140px] "
-                        href="/guides">Guides</a><a class="block w-full rounded-lg border border-gray-300 bg-gray-100 px-6 py-4 text-center text-lg font-medium hover:no-underline dark:border-gray-700 dark:bg-gray-800 sm:w-[140px] " href="/blog">Blog</a>
-                </div>
-            </ul>
-            <script>
-            </script>
-        </div>
-        <nav class="hidden h-full list-none flex-row items-center justify-end gap-6 whitespace-nowrap sm:flex"><a class="text-lg font-medium hover:no-underline" href="/docs">Docs</a><a class="text-lg font-medium hover:no-underline" href="/guides">Guides</a><a class="text-lg font-medium hover:no-underline" href="/blog">Blog</a>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 121 79.5 212T440-162Zm276-102q20-22 36-47.5t26.5-53q10.5-27.5 16-56.5t5.5-59q0-98-54.5-179T600-776v16q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h240q17 0 28.5 11.5T600-440v120h40q26 0 47 15.5t29 40.5Z"/></svg>
+      </div>
+      <div class="menu-block-wrapper ">
+        <div class="menu-overlay"></div>
+        <nav class="menu-block" id="append-menu-header">
+          <div class="mobile-menu-head">
+            <a href="index.html">
+              <img src="./image/icons/logo-whites.svg" alt="brand logo">
+            </a>
+            <div class="current-menu-title"></div>
+            <div class="mobile-menu-close">&times;</div>
+          </div>
+          <ul class="site-menu-main">
+            <li class="nav-item nav-item-has-children">
+              <a href="#" class="nav-link-item drop-trigger">Demos<i class="fas fa-angle-down"></i>
+              </a>
+              <div class="sub-menu" id="submenu-1">
+                <ul class="sub-menu_list">
+                  <li class="sub-menu_item">
+                    <a href="index.html">
+                      <span class="menu-item-text">Digital agency</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="index-2.html">
+                      <span class="menu-item-text">Chat software</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="index-3.html">
+                      <span class="menu-item-text">Fitness App</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="index-4.html">
+                      <span class="menu-item-text">Online Courses</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="index-5.html">
+                      <span class="menu-item-text">SEO Agency</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="index-6.html">
+                      <span class="menu-item-text">Cold Email</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="index-7.html">
+                      <span class="menu-item-text">Web Hosting</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="index-8.html">
+                      <span class="menu-item-text">Startup</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="index-9.html">
+                      <span class="menu-item-text">Tracking Software</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="index-10.html">
+                      <span class="menu-item-text">AI Writing Tool</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link-item drop-trigger">About Us</a>
+            </li>
+            <li class="nav-item nav-item-has-children">
+              <a href="#" class="nav-link-item drop-trigger">Pages<i class="fas fa-angle-down"></i>
+              </a>
+              <div class="sub-menu" id="submenu-3">
+                <ul class="sub-menu_list">
+                  <li class="sub-menu_item nav-item-has-children child-item">
+                    <a href="#" class="sub-menu__item-link">
+                      <span class="menu-item-text">Services</span>
+                      <i class="fas fa-angle-right"></i>
+                    </a>
+                    <div class="sub-menu child-sub" id="submenu-22">
+                      <ul class="sub-menu_list">
+                        <li class="sub-menu_item">
+                          <a href="service.html">
+                            <span class="menu-item-text">Service</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="service-details.html">
+                            <span class="menu-item-text">Service Details</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="team.html">
+                      <span class="menu-item-text">Team</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item nav-item-has-children child-item">
+                    <a class="sub-menu__item-link">
+                      <span class="menu-item-text">Pricing</span>
+                      <i class="fas fa-angle-right"></i>
+                    </a>
+                    <div class="sub-menu child-sub" id="submenu-11">
+                      <ul class="sub-menu_list">
+                        <li class="sub-menu_item">
+                          <a href="pricing.html">
+                            <span class="menu-item-text">Pricing 1</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="pricing-2.html">
+                            <span class="menu-item-text">Pricing 2</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="sub-menu_item nav-item-has-children child-item">
+                    <a class="sub-menu__item-link">
+                      <span class="menu-item-text">Career</span>
+                      <i class="fas fa-angle-right"></i>
+                    </a>
+                    <div class="sub-menu child-sub" id="submenu-4">
+                      <ul class="sub-menu_list">
+                        <li class="sub-menu_item">
+                          <a href="career.html">
+                            <span class="menu-item-text">Career</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="career-details.html">
+                            <span class="menu-item-text">Career Details</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="sub-menu_item nav-item-has-children child-item">
+                    <a class="sub-menu__item-link">
+                      <span class="menu-item-text">Portfolio</span>
+                      <i class="fas fa-angle-right"></i>
+                    </a>
+                    <div class="sub-menu child-sub" id="submenu-7">
+                      <ul class="sub-menu_list">
+                        <li class="sub-menu_item">
+                          <a href="portfolio.html">
+                            <span class="menu-item-text">Portfolio 1 Classic</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="portfolio-2.html">
+                            <span class="menu-item-text">Portfolio 2 Masonry</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="portfolio-3.html">
+                            <span class="menu-item-text">Portfolio 3 Modern</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="portfolio-4.html">
+                            <span class="menu-item-text">Portfolio 4 Minimal</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="portfolio-details.html">
+                            <span class="menu-item-text">Portfolio Details</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="sub-menu_item nav-item-has-children child-item">
+                    <a class="sub-menu__item-link">
+                      <span class="menu-item-text">Blog</span>
+                      <i class="fas fa-angle-right"></i>
+                    </a>
+                    <div class="sub-menu child-sub" id="submenu-12">
+                      <ul class="sub-menu_list">
+                        <li class="sub-menu_item">
+                          <a href="blog.html">
+                            <span class="menu-item-text">Blog</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="blog-details.html">
+                            <span class="menu-item-text">Blog Details</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="sub-menu_item nav-item-has-children child-item">
+                    <a class="sub-menu__item-link">
+                      <span class="menu-item-text">Faq</span>
+                      <i class="fas fa-angle-right"></i>
+                    </a>
+                    <div class="sub-menu child-sub" id="submenu-8">
+                      <ul class="sub-menu_list">
+                        <li class="sub-menu_item">
+                          <a href="faq.html">
+                            <span class="menu-item-text">FAQ 1</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="faq-2.html">
+                            <span class="menu-item-text">FAQ 2</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="faq-3.html">
+                            <span class="menu-item-text">FAQ 3</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="faq-4.html">
+                            <span class="menu-item-text">FAQ 4</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="sub-menu_item nav-item-has-children child-item">
+                    <a class="sub-menu__item-link">
+                      <span class="menu-item-text">Utility</span>
+                      <i class="fas fa-angle-right"></i>
+                    </a>
+                    <div class="sub-menu child-sub" id="submenu-9">
+                      <ul class="sub-menu_list">
+                        <li class="sub-menu_item">
+                          <a href="404.html">
+                            <span class="menu-item-text">404</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="coming-soon.html">
+                            <span class="menu-item-text">Coming Soon</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="sub-menu_item nav-item-has-children child-item">
+                    <a class="sub-menu__item-link">
+                      <span class="menu-item-text">Account</span>
+                      <i class="fas fa-angle-right"></i>
+                    </a>
+                    <div class="sub-menu child-sub" id="submenu-10">
+                      <ul class="sub-menu_list">
+                        <li class="sub-menu_item">
+                          <a href="sign-in.html">
+                            <span class="menu-item-text">Sign In</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="sign-up.html">
+                            <span class="menu-item-text">Sign Up</span>
+                          </a>
+                        </li>
+                        <li class="sub-menu_item">
+                          <a href="reset-password.html">
+                            <span class="menu-item-text">Reset Password</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item nav-item-has-children">
+              <a href="#" class="nav-link-item drop-trigger">Contact<i class="fas fa-angle-down"></i>
+              </a>
+              <div class="sub-menu" id="submenu-13">
+                <ul class="sub-menu_list">
+                  <li class="sub-menu_item">
+                    <a href="contact.html">
+                      <span class="menu-item-text">Contact 1</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="contact-2.html">
+                      <span class="menu-item-text">Contact 2</span>
+                    </a>
+                  </li>
+                  <li class="sub-menu_item">
+                    <a href="contact-3.html">
+                      <span class="menu-item-text">Contact 3</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
         </nav>
-    </header>
-</div>
+      </div>
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~
+      mobile menu trigger
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <div class="mobile-menu-trigger">
+        <span></span>
+      </div>
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~
+        Mobile Menu Hamburger Ends
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <div class="header-cta-btn-wrapper">
+        <a href="#" class="btn-masco btn-masco--header btn-masco--header-secondary">
+          <span>Login</span>
+        </a>
+        <a href="#" class="btn-masco btn-masco--header   btn-secondary-l02 btn-fill--up">
+          <span>Sign up free</span></a>
+      </div>
+    </nav>
+  </div>
+</header>
