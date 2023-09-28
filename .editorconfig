@@ -14,3 +14,2575 @@ quote_type = single
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+
+USE [master]
+GO
+/****** Object:  Database [RiskManagement_Latest]    Script Date: 2023-09-28 15:36:07 ******/
+CREATE DATABASE [RiskManagement_Latest]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'RiskManagement', FILENAME = N'E:\SQL_Data\MSSQLSERVER\RiskManagement_Latest.mdf' , SIZE = 1114112KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1048576KB )
+ LOG ON 
+( NAME = N'RiskManagement_log', FILENAME = N'F:\SQL_Log\MSSQLSERVER\RiskManagement_Latest_log.ldf' , SIZE = 567552KB , MAXSIZE = 2048GB , FILEGROWTH = 524288KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [RiskManagement_Latest] SET COMPATIBILITY_LEVEL = 120
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [RiskManagement_Latest].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [RiskManagement_Latest] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET RECOVERY FULL 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET  MULTI_USER 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [RiskManagement_Latest] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [RiskManagement_Latest] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'RiskManagement_Latest', N'ON'
+GO
+ALTER DATABASE [RiskManagement_Latest] SET QUERY_STORE = OFF
+GO
+USE [RiskManagement_Latest]
+GO
+/****** Object:  User [NT0001\XPAEV202]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\XPAEV202] FOR LOGIN [NT0001\XPAEV202]
+GO
+/****** Object:  User [NT0001\XPA3V3MZ]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\XPA3V3MZ]
+GO
+/****** Object:  User [NT0001\xpa3v3bm]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\xpa3v3bm] WITH DEFAULT_SCHEMA=[NT0001\xpa3v3bm]
+GO
+/****** Object:  User [NT0001\XPA3O3MA]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\XPA3O3MA] FOR LOGIN [NT0001\XPA3O3MA] WITH DEFAULT_SCHEMA=[NT0001\XPA3O3MA]
+GO
+/****** Object:  User [NT0001\D000892]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\D000892] FOR LOGIN [NT0001\D000892] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  User [NT0001\D000891]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\D000891] FOR LOGIN [NT0001\D000891] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  User [NT0001\BG4125]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\BG4125] FOR LOGIN [NT0001\BG4125] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  User [NT0001\BF5981]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\BF5981] FOR LOGIN [NT0001\BF5981] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  User [NT0001\BF3532]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\BF3532] FOR LOGIN [NT0001\BF3532] WITH DEFAULT_SCHEMA=[dbo]
+GO
+/****** Object:  User [NT0001\BF2561]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE USER [NT0001\BF2561] FOR LOGIN [NT0001\BF2561] WITH DEFAULT_SCHEMA=[dbo]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [NT0001\XPAEV202]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [NT0001\XPA3V3MZ]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [NT0001\D000892]
+GO
+ALTER ROLE [db_datawriter] ADD MEMBER [NT0001\D000892]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [NT0001\D000891]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [NT0001\BG4125]
+GO
+ALTER ROLE [db_datareader] ADD MEMBER [NT0001\BF5981]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [NT0001\BF3532]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [NT0001\BF2561]
+GO
+/****** Object:  Schema [NT0001\XPA3O3MA]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE SCHEMA [NT0001\XPA3O3MA]
+GO
+/****** Object:  Schema [NT0001\xpa3v3bm]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE SCHEMA [NT0001\xpa3v3bm]
+GO
+/****** Object:  Table [dbo].[AssessmentUnitSurveys]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AssessmentUnitSurveys](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[AssessmentUnitID] [int] NOT NULL,
+	[SurveyID] [int] NOT NULL,
+	[HasStarted] [bit] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[CurrentPage] [int] NULL,
+ CONSTRAINT [PK_AssessmentUnitSurveys] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Questionnaires]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Questionnaires](
+	[QuestionnaireID] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](50) NULL,
+	[Description] [nvarchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[QuestionnaireID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SurveyUsersAccess]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SurveyUsersAccess](
+	[SurveyUser] [varchar](20) NOT NULL,
+	[AssessmentUnitSurveyID] [int] NOT NULL,
+ CONSTRAINT [PK_SurveyUsersAccess] PRIMARY KEY CLUSTERED 
+(
+	[SurveyUser] ASC,
+	[AssessmentUnitSurveyID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AssessmentUnit]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AssessmentUnit](
+	[AUID] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](200) NULL,
+	[DateCreated] [datetime] NULL,
+	[LastUpdated] [datetime] NULL,
+	[Name] [nvarchar](10) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[AUID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[SurveyUserAccessWorkFlow]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[SurveyUserAccessWorkFlow]
+AS
+SELECT        dbo.AssessmentUnit.AUID, dbo.AssessmentUnitSurveys.AssessmentUnitID, dbo.Questionnaires.QuestionnaireID, dbo.AssessmentUnitSurveys.SurveyID, dbo.SurveyUsersAccess.AssessmentUnitSurveyID, 
+                         dbo.AssessmentUnitSurveys.ID, dbo.SurveyUsersAccess.SurveyUserID, dbo.SurveyUsers.ID AS Expr1
+FROM            dbo.AssessmentUnit INNER JOIN
+                         dbo.AssessmentUnitSurveys ON dbo.AssessmentUnit.AUID = dbo.AssessmentUnitSurveys.AssessmentUnitID INNER JOIN
+                         dbo.Questionnaires ON dbo.AssessmentUnitSurveys.SurveyID = dbo.Questionnaires.QuestionnaireID INNER JOIN
+                         dbo.SurveyUsersAccess ON dbo.AssessmentUnitSurveys.ID = dbo.SurveyUsersAccess.AssessmentUnitSurveyID INNER JOIN
+                         dbo.SurveyUsers ON dbo.SurveyUsersAccess.SurveyUserID = dbo.SurveyUsers.ID
+GO
+/****** Object:  Table [dbo].[WeeklyObservationLog]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[WeeklyObservationLog](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[LogDate] [datetime] NULL,
+	[ObservationID] [int] NULL,
+	[Hyperlink] [nvarchar](max) NULL,
+	[ObservationStatus] [nvarchar](10) NULL,
+	[RegistrationDate] [datetime2](7) NULL,
+	[Deadline] [datetime2](7) NULL,
+	[ClosureDate] [datetime2](7) NULL,
+	[Grade] [int] NULL,
+	[BusinessUnit] [nvarchar](max) NULL,
+	[BusinessAreas] [nvarchar](max) NULL,
+	[Countries] [nvarchar](max) NULL,
+	[RiskOwner] [nvarchar](max) NULL,
+	[RegulatoryCategories] [nvarchar](max) NULL,
+	[Regulations] [nvarchar](max) NULL,
+	[TaxonomyLevel1] [nvarchar](max) NULL,
+	[TaxonomyLevel2] [nvarchar](max) NULL,
+	[TaxonomyLevel3] [nvarchar](max) NULL,
+	[MitigationSummaryAvailable] [nvarchar](10) NULL,
+	[Deleted] [nvarchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[RAMSLog]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [dbo].[RAMSLog] as select * from WeeklyObservationLog where BusinessUnit not in ('Group Compliance','Group Risk Management','Group Internal Audit'); 
+GO
+/****** Object:  Table [dbo].[Observation]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Observation](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](400) NOT NULL,
+	[StatusID] [int] NOT NULL,
+	[GradeID] [int] NOT NULL,
+	[Summary] [nvarchar](max) NULL,
+	[Recommendation] [nvarchar](max) NULL,
+	[Comment] [nvarchar](max) NULL,
+	[ClosureJustification] [nvarchar](max) NULL,
+	[Assignee] [nvarchar](10) NOT NULL,
+	[CreationUser] [nvarchar](10) NULL,
+	[CreationDate] [datetime2](7) NOT NULL,
+	[ModifiedUser] [nvarchar](10) NULL,
+	[ModifiedDate] [datetime2](7) NOT NULL,
+	[ClosureUser] [nvarchar](50) NULL,
+	[ClosureDate] [datetime2](7) NULL,
+	[Deadline] [datetime2](7) NULL,
+	[RiskAssessmentID] [int] NULL,
+	[GroupObservation] [int] NOT NULL,
+	[BusinessUnitID] [int] NOT NULL,
+	[GroupObservationID] [int] NULL,
+	[CategoryID] [int] NULL,
+	[ActivityOwner] [nvarchar](10) NOT NULL,
+	[ProposedPlan] [nvarchar](max) NULL,
+	[RegistrationNumber] [nvarchar](50) NULL,
+	[RiskOwner] [nvarchar](10) NOT NULL,
+	[BusinessLine] [nvarchar](max) NULL,
+	[Directive] [nvarchar](max) NULL,
+	[Submitted] [bit] NOT NULL,
+	[Deleted] [bit] NOT NULL,
+	[Comment1LoD] [nvarchar](max) NULL,
+	[Comment1LoDDate] [datetime] NULL,
+	[Comment1LODUser] [nvarchar](10) NULL,
+	[RAGStatusID] [int] NOT NULL,
+	[MitigationActionComment] [nvarchar](200) NULL,
+	[CancellationDate] [date] NULL,
+	[RiskAcceptanceDate] [date] NULL,
+	[DeadlineExtensionDate] [date] NULL,
+	[DateIdentified] [datetime] NULL,
+	[RevisedDeadline] [datetime] NULL,
+ CONSTRAINT [PK_Observation] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationActions]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationActions](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ActionTitle] [nvarchar](max) NULL,
+	[ActionSummary] [nvarchar](max) NULL,
+	[BusinessAreaID] [int] NULL,
+	[ObservationID] [int] NOT NULL,
+	[Assignee] [nvarchar](10) NULL,
+	[Deadline] [datetime2](7) NOT NULL,
+	[CreationUser] [nvarchar](10) NULL,
+	[CreationDate] [datetime2](7) NOT NULL,
+	[ModifiedUser] [nvarchar](10) NULL,
+	[ModifiedDate] [datetime2](7) NOT NULL,
+	[ActionStatus] [int] NOT NULL,
+	[ClosureDate] [datetime] NULL,
+	[ClosureUser] [nvarchar](10) NULL,
+	[TaxonomyLevel3ID] [int] NULL,
+	[ActionComment1LoD] [nvarchar](max) NULL,
+	[ActionComment1LoDDate] [datetime] NULL,
+	[ActionComment1LODUser] [nvarchar](10) NULL,
+	[ActivityOwner] [varchar](10) NULL,
+ CONSTRAINT [PK_ObservationActions] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationBusinessAreas]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationBusinessAreas](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[BusinessAreaID] [int] NOT NULL,
+	[CountryID] [int] NULL,
+ CONSTRAINT [PK_ObservationBusinessAreas] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationCountries]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationCountries](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[CountryID] [int] NOT NULL,
+ CONSTRAINT [PK_ObservationCountries] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationRegulations]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationRegulations](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[RegulationID] [int] NOT NULL,
+	[RegulationComment] [varchar](250) NULL,
+ CONSTRAINT [PK_ObservationRegulations] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationRegCategories]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationRegCategories](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[RegulatoryCategoryID] [int] NOT NULL,
+ CONSTRAINT [PK_ObservationRegCategories] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BusinessArea]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BusinessArea](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[BusinessUnitID] [int] NOT NULL,
+	[LegalEntity] [bit] NOT NULL,
+	[IsDefault] [bit] NOT NULL,
+ CONSTRAINT [PK_BusinessArea] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BusinessUnit]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BusinessUnit](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Code] [nvarchar](10) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_BusinessUnit] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationTaxonomy]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationTaxonomy](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ObservationID] [int] NULL,
+	[TaxonomyLevel3ID] [int] NULL,
+ CONSTRAINT [PK_ObservationTaxonomy] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Country]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Country](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_Country] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationCategory]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationCategory](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Value] [int] NOT NULL,
+	[Description] [nvarchar](max) NULL,
+	[isActive] [bit] NOT NULL,
+	[HasComment] [bit] NOT NULL,
+ CONSTRAINT [PK_ObservationCategory] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Regulation]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Regulation](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[HasComment] [bit] NOT NULL,
+ CONSTRAINT [PK_Regulation] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RegulatoryCategory]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RegulatoryCategory](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[IsActive] [bit] NULL,
+	[TaxonomyLevel3ID] [int] NULL,
+	[AppliedRegulation] [nvarchar](max) NULL,
+ CONSTRAINT [PK_RegulatoryCategory] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[AllObservations]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE VIEW [dbo].[AllObservations] as select A.ID, A.Title, A.ObservationLevel, 
+CASE
+            WHEN A.[Status] = 1
+               THEN 'Open'
+               ELSE 'Closed'
+       END as ObservationStatus, D.Name as [BusinessUnit],
+SUBSTRING(
+        (
+            SELECT ','+C.AreaName AS [text()]
+            FROM ObservationBusinessAreas as B inner join BusinessArea as C on B.BusinessAreaID = C.ID  
+            WHERE B.ObservationID = A.ID 
+            ORDER BY B.ObservationID
+            FOR XML PATH ('')
+        ), 2, 1000) as [BusinessAreas],
+		F.LevelName as [Taxonomy Level 1],
+		G.LevelName as [Taxonomy Level 2],
+		SUBSTRING(
+        (
+            SELECT ','+J2.LevelName AS [text()]
+            FROM ObservationTaxonomy as J inner join TaxonomyLevel3 as J2 on J.TaxonomyLevel3ID = J2.ID  
+            WHERE J.ObservationID = A.ID 
+            ORDER BY J.ObservationID
+            FOR XML PATH ('')
+        ), 2, 1000) as [Taxonomy Level 3],
+		SUBSTRING(
+        (
+            SELECT ','+H2.CategoryaName AS [text()]
+            FROM ObservationRegCategories as H inner join RegulatoryCategory as H2 on H.RegulatoryCategoryID = H2.ID  
+            WHERE H.ObservationID = A.ID 
+            ORDER BY H.ObservationID
+            FOR XML PATH ('')
+        ), 2, 1000) as [Regulatory Categories],
+		SUBSTRING(
+        (
+            SELECT ','+I2.RegulationName AS [text()]
+            FROM ObservationRegulations as I inner join Regulation as I2 on I.RegulationID = I2.ID  
+            WHERE I.ObservationID = A.ID 
+            ORDER BY I.ObservationID
+            FOR XML PATH ('')
+        ), 2, 1000) as [Regulations],
+		SUBSTRING(
+        (
+            SELECT ','+K2.CountryName AS [text()]
+            FROM ObservationBusinessAreas as K inner join Country as K2 on K.CountryID = K2.ID  
+            WHERE K.ObservationID = A.ID 
+            ORDER BY K.ObservationID
+            FOR XML PATH ('')
+        ), 2, 1000) as [Countries],
+		SUBSTRING(
+        (
+            SELECT ','+M2.CountryName AS [text()]
+            FROM ObservationCountries as M inner join Country as M2 on M.CountryID = M2.ID  
+            WHERE M.ObservationID = A.ID 
+            ORDER BY M.ObservationID
+            FOR XML PATH ('')
+        ), 2, 1000) as [Legacy Countries],
+		A.BusinessLine,
+		A.RiskOwner,
+		A.ActivityOwner,
+		E.[Description] as [Observation Origin],
+		A.Summary as [Description],
+		A.Recommendation as [Mitigation Summary],
+		A.ProposedPlan,
+		SUBSTRING(
+        (
+            SELECT ','+N.ActionSummary AS [text()]
+            FROM ObservationActions as N
+            WHERE N.ObservationID = A.ID 
+            ORDER BY N.ObservationID
+            FOR XML PATH ('')
+        ), 2, 1000) as [Mitigating Actions],
+		A.Comment as [Comments],
+		A.Deadline as [Current Deadline],
+		A.ClosureDate as [Date of Closure],
+		A.ClosureUser as [Closed By],
+		A.ClosureJustification as [Justification for Closure],
+		A.CreationDate as [Registration Date],
+		A.CreationUser as [Registered By],
+		A.ModifiedDate as [Last Updated],
+		A.ModifiedUser as [Last Updated By],
+		A.RegistrationNumber as [Old Registration Number],
+		CASE
+            WHEN A.[Deleted] = 1
+               THEN 'Yes'
+               ELSE 'No'
+       END as [Deleted], 
+	   CASE
+            WHEN A.[Submitted] = 1
+               THEN 'Yes'
+               ELSE 'No'
+       END as [Submitted],
+	   CASE
+            WHEN LEN(A.[Recommendation]) > 1
+               THEN 'Yes'
+               ELSE 'No'
+       END as [MitigationSummaryAvailable],
+	   CONCAT('http://rams.danskenet.net/Observation/Edit?ObservationID=', A.ID, '&NewObservation=false') as [Hyperlink]
+from Observation as A inner join BusinessUnit as D on A.BusinessUnitID = D.ID left join ObservationCategory as E on A.ObservationCategoryID = E.ID
+left join TaxonomyLevel1 as F on A.TaxonomyLevel1ID = F.ID left join TaxonomyLevel2 as G on A.TaxonomyLevel2ID = G.ID;
+GO
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[__EFMigrationsHistory](
+	[MigrationId] [nvarchar](150) NOT NULL,
+	[ProductVersion] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY CLUSTERED 
+(
+	[MigrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Answers]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Answers](
+	[AnswerID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionID] [int] NULL,
+	[AnswerTitle] [nvarchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[AnswerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AttachedControl]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AttachedControl](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ControlID] [int] NOT NULL,
+	[RiskID] [int] NOT NULL,
+	[OverallRatingID] [int] NULL,
+ CONSTRAINT [PK_AttachedControl] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AuditTrail]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AuditTrail](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[AuditUser] [nvarchar](50) NULL,
+	[AuditDate] [datetime2](7) NOT NULL,
+	[ActionType] [nvarchar](20) NULL,
+	[FieldName] [nvarchar](max) NULL,
+	[OldValue] [nvarchar](max) NULL,
+	[NewValue] [nvarchar](max) NULL,
+	[ObservationID] [int] NULL,
+ CONSTRAINT [PK_AuditTrail] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AuditTrailAction]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AuditTrailAction](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_AuditTrailAction] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Authorisation]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Authorisation](
+	[ID] [int] NOT NULL,
+	[ADGroup] [nvarchar](10) NULL,
+	[BusinessUnitID] [int] NULL,
+	[BusinessAreaID] [int] NULL,
+	[LoD] [int] NULL,
+	[Role] [nvarchar](20) NULL,
+	[Description] [nvarchar](max) NULL,
+	[Active] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AuthorizationAccessPermissions]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AuthorizationAccessPermissions](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ViewAccess] [bit] NOT NULL,
+	[EditAccess] [bit] NOT NULL,
+	[CommentAccess] [bit] NOT NULL,
+	[AuthorizationID] [int] NOT NULL,
+	[ApproverAccess] [bit] NOT NULL,
+	[AdminAccess] [bit] NOT NULL,
+ CONSTRAINT [PK_RoleAccessPermissions] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AuthorizationBusinessAreas]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AuthorizationBusinessAreas](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[AuthorizationID] [int] NOT NULL,
+	[BusinessAreaID] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC,
+	[AuthorizationID] ASC,
+	[BusinessAreaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AuthorizationBusinessUnits]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AuthorizationBusinessUnits](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[AuthorizationID] [int] NOT NULL,
+	[BusinessUnitID] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC,
+	[AuthorizationID] ASC,
+	[BusinessUnitID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AuthorizationLegalEntities]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AuthorizationLegalEntities](
+	[AuthorizationID] [int] NOT NULL,
+	[LegalEntityID] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[AuthorizationID] ASC,
+	[LegalEntityID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[AuthorizationRoles]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AuthorizationRoles](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[AuthorizationID] [int] NOT NULL,
+	[RoleID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC,
+	[AuthorizationID] ASC,
+	[RoleID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Authorizations]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Authorizations](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](250) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[ShortName] [nvarchar](100) NULL,
+ CONSTRAINT [PK_Authorizations] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BusinessAreaToBusinessUnit]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BusinessAreaToBusinessUnit](
+	[BusinessAreaID] [int] NOT NULL,
+	[BusinessUnitID] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[BusinessAreaID] ASC,
+	[BusinessUnitID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Comp]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Comp](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Observation Registration Number] [nvarchar](255) NULL,
+	[Business Unit] [nvarchar](255) NULL,
+	[Business Area] [nvarchar](255) NULL,
+	[Country] [nvarchar](255) NULL,
+	[ERM Level 2] [nvarchar](255) NULL,
+	[ERM Level 3] [nvarchar](255) NULL,
+	[Regulatory Category] [nvarchar](255) NULL,
+	[Regulation] [nvarchar](255) NULL,
+	[Line of Business (L4)] [nvarchar](255) NULL,
+	[Observation grade] [nvarchar](255) NULL,
+	[Heading] [nvarchar](255) NULL,
+	[Explanation of issue] [ntext] NULL,
+	[Internal directive or policy] [nvarchar](255) NULL,
+	[Recommended Mitigation Actions] [nvarchar](255) NULL,
+	[Proposed Action Plan] [nvarchar](255) NULL,
+	[Risk Owner Comments] [nvarchar](255) NULL,
+	[Risk Owner] [nvarchar](255) NULL,
+	[Activity owner] [nvarchar](255) NULL,
+	[Next Compliance follow-up] [nvarchar](255) NULL,
+	[Proposed completion date by Risk Owner] [nvarchar](255) NULL,
+	[Completion date] [datetime] NULL,
+	[Status] [nvarchar](255) NULL,
+	[Observation registration date] [nvarchar](255) NULL,
+	[Modified By] [nvarchar](255) NULL,
+	[Last modified date] [nvarchar](255) NULL,
+	[Observation closed date] [nvarchar](255) NULL,
+	[StatusInt] [int] NULL,
+	[BusinessUnitInt] [int] NULL,
+	[ExportID] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Comp2]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Comp2](
+	[Observation Registration Number] [nvarchar](255) NULL,
+	[Business Unit] [nvarchar](255) NULL,
+	[Business Area] [nvarchar](255) NULL,
+	[Country] [nvarchar](255) NULL,
+	[ERM Level 2] [nvarchar](255) NULL,
+	[ERM Level 3] [nvarchar](255) NULL,
+	[Regulatory Category] [nvarchar](255) NULL,
+	[Regulation] [nvarchar](255) NULL,
+	[Line of Business (L4)] [nvarchar](255) NULL,
+	[Observation grade] [nvarchar](255) NULL,
+	[Heading] [nvarchar](255) NULL,
+	[Explanation of issue] [nvarchar](max) NULL,
+	[Internal directive or policy] [nvarchar](255) NULL,
+	[Recommended Mitigation Actions] [nvarchar](255) NULL,
+	[Proposed Action Plan] [nvarchar](255) NULL,
+	[Risk Owner Comments] [nvarchar](255) NULL,
+	[Risk Owner] [nvarchar](255) NULL,
+	[Activity owner] [nvarchar](255) NULL,
+	[Next Compliance follow-up] [nvarchar](255) NULL,
+	[Proposed completion date by Risk Owner] [nvarchar](255) NULL,
+	[Completion date] [datetime] NULL,
+	[Status] [nvarchar](255) NULL,
+	[Observation registration date] [nvarchar](255) NULL,
+	[Modified By] [nvarchar](255) NULL,
+	[Last modified date] [nvarchar](255) NULL,
+	[Observation closed date] [datetime] NULL,
+	[Column1] [nvarchar](255) NULL,
+	[Column2] [nvarchar](255) NULL,
+	[Column3] [nvarchar](255) NULL,
+	[Column4] [nvarchar](255) NULL,
+	[StatusID] [int] NULL,
+	[BusinessUnitInt] [int] NULL,
+	[ExportID] [int] NULL,
+	[GradeID] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Control]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Control](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](max) NULL,
+	[Description] [nvarchar](max) NULL,
+	[Active] [int] NOT NULL,
+	[CreationUser] [nvarchar](max) NULL,
+	[CreationDate] [datetime2](7) NOT NULL,
+	[ModifiedUser] [nvarchar](max) NULL,
+	[ModifiedDate] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_Control] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ControlRating]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ControlRating](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Value] [int] NOT NULL,
+	[Title] [nvarchar](max) NULL,
+	[Definition] [nvarchar](max) NULL,
+ CONSTRAINT [PK_ControlRating] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Grades]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Grades](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](150) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_Grades] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ImpactRating]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ImpactRating](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Value] [int] NOT NULL,
+	[Description] [nvarchar](max) NULL,
+ CONSTRAINT [PK_ImpactRating] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LegalEntity]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LegalEntity](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](200) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LegalEntityToBusinessUnit]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LegalEntityToBusinessUnit](
+	[LegalEntityID] [int] NOT NULL,
+	[BusinessUnitID] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[LegalEntityID] ASC,
+	[BusinessUnitID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LikelihoodRating]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LikelihoodRating](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Value] [int] NOT NULL,
+	[Description] [nvarchar](max) NULL,
+ CONSTRAINT [PK_LikelihoodRating] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LinesOfDefense]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LinesOfDefense](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](250) NOT NULL,
+	[Line] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_LevelsOfDefense] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[News]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[News](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](max) NOT NULL,
+	[Description] [nvarchar](max) NULL,
+	[ShortDescription] [nvarchar](max) NULL,
+	[Date] [datetime] NULL,
+	[Author] [nchar](6) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[NIdata]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[NIdata](
+	[Observation Registration Number] [nvarchar](255) NULL,
+	[Business Unit] [nvarchar](255) NULL,
+	[Business Area] [nvarchar](255) NULL,
+	[Country] [nvarchar](255) NULL,
+	[ERM Level 2 _According to Group ERM, this is Level 1] [nvarchar](255) NULL,
+	[ERM Level 3_According to group ERM this is Level 2] [nvarchar](255) NULL,
+	[ERM level 3] [nvarchar](255) NULL,
+	[Regulatory Category] [nvarchar](255) NULL,
+	[Regulation] [nvarchar](255) NULL,
+	[Line of Business (L4)] [nvarchar](255) NULL,
+	[Observation grade] [float] NULL,
+	[Heading] [nvarchar](255) NULL,
+	[Explanation of issue] [nvarchar](max) NULL,
+	[Internal directive or policy] [nvarchar](255) NULL,
+	[Recommended Mitigation Actions] [nvarchar](255) NULL,
+	[Proposed Action Plan] [nvarchar](255) NULL,
+	[Risk Owner Comments] [nvarchar](255) NULL,
+	[Risk Owner] [nvarchar](255) NULL,
+	[Activity owner] [nvarchar](255) NULL,
+	[Next Compliance follow-up] [nvarchar](255) NULL,
+	[Proposed completion date by Risk Owner] [datetime] NULL,
+	[Completion date] [nvarchar](255) NULL,
+	[Status] [nvarchar](255) NULL,
+	[Observation registration date] [datetime] NULL,
+	[Modified By] [nvarchar](255) NULL,
+	[Last modified date] [nvarchar](255) NULL,
+	[Observation closed date] [nvarchar](255) NULL,
+	[Is this what we could import to the comment box in RAMS?] [nvarchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationCategoryTest]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationCategoryTest](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[CategoryID] [int] NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[Value] [int] NOT NULL,
+	[Description] [nvarchar](max) NULL,
+	[CategoryComment] [varchar](200) NULL,
+ CONSTRAINT [PK_ObservationCategoryTest] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationComment]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationComment](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Comment] [nvarchar](max) NOT NULL,
+	[LineOfDefenceId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[User] [nvarchar](10) NOT NULL,
+	[ObservationId] [int] NOT NULL,
+ CONSTRAINT [PK_ObservationComment1] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationFiles]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationFiles](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Filename] [nvarchar](max) NULL,
+	[Deleted] [int] NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[Description] [nvarchar](max) NULL,
+	[UploadUser] [nvarchar](10) NULL,
+	[UploadDate] [datetime] NULL,
+	[ModifiedUser] [nvarchar](10) NULL,
+	[ModifiedDate] [datetime] NULL,
+	[RetentionDate] [datetime] NULL,
+	[GDPR] [bit] NOT NULL,
+ CONSTRAINT [PK_ObservationFiles] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationLegalEntities]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationLegalEntities](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[LegalEntityID] [int] NOT NULL,
+ CONSTRAINT [PK_ObservationLegalEntities] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationLifecycle]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationLifecycle](
+	[ObservationID] [int] NOT NULL,
+	[CreationDate] [date] NULL,
+	[CreatedBy] [varchar](6) NULL,
+	[ModificationDate] [date] NULL,
+	[ModifiedBy] [varchar](6) NULL,
+	[ClosureDate] [date] NULL,
+	[ClosuredBy] [varchar](6) NULL,
+	[ClosureJustification] [varchar](255) NULL,
+	[Deadline] [date] NULL,
+	[RevisedDeadlineBy] [varchar](6) NULL,
+	[RevisedDeadlineJustification] [varchar](255) NULL,
+	[DeadlineExtensionDate] [date] NULL,
+	[DeadlineExtendedBy] [varchar](6) NULL,
+	[DeadlineExtensionJustification] [varchar](255) NULL,
+	[CancellationDate] [date] NULL,
+	[RiskAcceptanceDate] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationRAGStatus]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationRAGStatus](
+	[CurrentRAGStatusID] [int] NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[Comment] [varchar](250) NULL,
+ CONSTRAINT [PK_ObservationRAGStatus] PRIMARY KEY CLUSTERED 
+(
+	[ObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationRAGStatusAuditTrail]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationRAGStatusAuditTrail](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[PreviousRAGStatusID] [int] NOT NULL,
+	[NewRAGStatusID] [int] NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[Comment] [varchar](250) NULL,
+	[Timestamp] [datetime] NOT NULL,
+	[UserBNumber] [varchar](50) NULL,
+	[ActionID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationSelfRaisedIssue]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationSelfRaisedIssue](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[IsSelfRaised] [bit] NOT NULL,
+	[Justification] [varchar](250) NULL,
+	[ObservationID] [int] NOT NULL,
+ CONSTRAINT [PK_ObservationSelfRaisedIssue] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationStatus]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationStatus](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NOT NULL,
+	[Color] [varchar](50) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_ObservationStatus] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationTaxonomies]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationTaxonomies](
+	[ObservationID] [int] NOT NULL,
+	[TaxonomyID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ObservationID] ASC,
+	[TaxonomyID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ObservationTaxonomyLvl2]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ObservationTaxonomyLvl2](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ObservationID] [int] NOT NULL,
+	[TaxonomyLevel2ID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Pages]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pages](
+	[PageID] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](100) NULL,
+	[Section] [varchar](255) NULL,
+	[QuestionnaireID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[PageID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Pages_Modified]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Pages_Modified](
+	[QuestionnaireID] [int] NOT NULL,
+	[PageID] [int] NOT NULL,
+	[Title] [nvarchar](100) NULL,
+	[Section] [varchar](255) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PagesNewStruct]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PagesNewStruct](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](100) NULL,
+	[Section] [varchar](255) NULL,
+	[IsActive] [bit] NOT NULL,
+	[QuestionnaireID] [int] NOT NULL,
+	[Sort] [int] NULL,
+ CONSTRAINT [PK_PagesNewStruct] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ParentTriggers]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ParentTriggers](
+	[QuestionID] [int] NOT NULL,
+	[TriggerQuestionID] [int] NOT NULL,
+	[QuestionnaireID] [int] NULL,
+	[AnswerValue] [nvarchar](max) NULL,
+	[HasComment] [bit] NULL,
+ CONSTRAINT [PK_Key] PRIMARY KEY CLUSTERED 
+(
+	[QuestionID] ASC,
+	[TriggerQuestionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[QuestionnaireAnswers]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[QuestionnaireAnswers](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionnaireID] [int] NOT NULL,
+	[QuestionID] [int] NOT NULL,
+	[AUID] [int] NOT NULL,
+	[AnswerValue] [nvarchar](max) NULL,
+	[LastUpdated] [datetime] NULL,
+	[User] [nvarchar](50) NULL,
+	[CommentValue] [nvarchar](max) NULL,
+	[ProductPart] [varchar](200) NULL,
+	[AnswerIndex] [varchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[QuestionnaireAnswersAction]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[QuestionnaireAnswersAction](
+	[ID] [int] NULL,
+	[Description] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[QuestionnaireAnswersArchive]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[QuestionnaireAnswersArchive](
+	[SnapshotDate] [date] NOT NULL,
+	[ID] [int] NOT NULL,
+	[QuestionnaireID] [int] NOT NULL,
+	[QuestionID] [int] NOT NULL,
+	[AUID] [int] NOT NULL,
+	[AnswerValue] [nvarchar](max) NULL,
+	[LastUpdated] [datetime] NULL,
+	[User] [nvarchar](50) NULL,
+	[CommentValue] [nvarchar](max) NULL,
+	[ProductPart] [varchar](200) NULL,
+	[AnswerIndex] [varchar](200) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[QuestionnaireAnswersProd]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[QuestionnaireAnswersProd](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionnaireID] [int] NOT NULL,
+	[QuestionID] [int] NOT NULL,
+	[AUID] [int] NOT NULL,
+	[AnswerValue] [nvarchar](max) NULL,
+	[LastUpdated] [datetime] NULL,
+	[User] [nvarchar](50) NULL,
+	[CommentValue] [nvarchar](max) NULL,
+	[ProductPart] [varchar](200) NULL,
+	[AnswerIndex] [varchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Questions]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Questions](
+	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionnaireID] [int] NULL,
+	[Name] [nvarchar](50) NULL,
+	[QuestionTitle] [nvarchar](max) NULL,
+	[ParentAnswer] [nvarchar](200) NULL,
+	[IsChild] [bit] NULL,
+	[PageID] [int] NULL,
+	[Type] [varchar](50) NULL,
+	[IsRequired] [bit] NULL,
+	[MaxSelectedChoices] [int] NULL,
+	[OtherText] [nvarchar](50) NULL,
+	[HelpText] [nvarchar](max) NULL,
+	[Sort] [int] NOT NULL,
+	[HasComment] [bit] NULL,
+	[IsCommentRequired] [bit] NULL,
+	[AllowAddRemRows] [bit] NULL,
+	[ColOrientation] [nvarchar](11) NULL,
+	[NestedParentID] [int] NOT NULL,
+	[InputType] [nvarchar](80) NULL,
+	[CommentText] [nvarchar](200) NULL,
+	[IsVisible] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[QuestionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[QuestionsTest]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[QuestionsTest](
+	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
+	[QuestionnaireID] [int] NULL,
+	[Name] [nvarchar](50) NULL,
+	[QuestionTitle] [nvarchar](max) NULL,
+	[ParentAnswer] [nvarchar](200) NULL,
+	[IsChild] [bit] NULL,
+	[PageID] [int] NULL,
+	[Type] [varchar](50) NULL,
+	[IsRequired] [bit] NULL,
+	[MaxSelectedChoices] [int] NULL,
+	[OtherText] [nvarchar](50) NULL,
+	[HelpText] [nvarchar](max) NULL,
+	[Sort] [int] NOT NULL,
+	[HasComment] [bit] NULL,
+	[IsCommentRequired] [bit] NULL,
+	[AllowAddRemRows] [bit] NULL,
+	[ColOrientation] [nvarchar](11) NULL,
+	[NestedParentID] [int] NOT NULL,
+	[InputType] [nvarchar](80) NULL,
+	[CommentText] [nvarchar](200) NULL,
+	[IsVisible] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[QuestionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RAGStatus]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RAGStatus](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Color] [varchar](50) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_RAG] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Risk]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Risk](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RiskRef] [nvarchar](max) NULL,
+	[InherentFinancialImpact] [int] NOT NULL,
+	[InherentCustomerImpact] [int] NOT NULL,
+	[InherentRegulatoryImpact] [int] NOT NULL,
+	[InherentReputationalImpact] [int] NOT NULL,
+	[FinancialRating] [nvarchar](max) NULL,
+	[NonFinancialRating] [nvarchar](max) NULL,
+	[ResidualFinancialRating] [nvarchar](max) NULL,
+	[ResidualNonFinancialRating] [nvarchar](max) NULL,
+	[CreationDate] [datetime2](7) NOT NULL,
+	[CreationUser] [nvarchar](max) NULL,
+	[RiskAssessmentID] [int] NOT NULL,
+	[BusinessAreaID] [int] NOT NULL,
+	[CountryID] [int] NOT NULL,
+	[TaxonomyLevel3ID] [int] NOT NULL,
+	[RegulatoryCategoryID] [int] NOT NULL,
+	[RegulationID] [int] NOT NULL,
+	[LikelihoodRatingID] [int] NOT NULL,
+	[FinancialImpactRatingID] [int] NOT NULL,
+	[CustomerImpactRatingID] [int] NOT NULL,
+	[RegulatoryImpactRatingID] [int] NOT NULL,
+	[ReputationalImpactRatingID] [int] NOT NULL,
+	[LikelihoodJustification] [nvarchar](max) NULL,
+	[FinancialJustification] [nvarchar](max) NULL,
+	[CustomerJustification] [nvarchar](max) NULL,
+	[RegulatoryJustification] [nvarchar](max) NULL,
+	[ReputationalJustification] [nvarchar](max) NULL,
+	[ResidualLikelihoodRatingID] [int] NULL,
+	[ResidualFinancialImpactRatingID] [int] NULL,
+	[ResidualCustomerImpactRatingID] [int] NULL,
+	[ResidualRegulatoryImpactRatingID] [int] NULL,
+	[ResidualReputationalImpactRatingID] [int] NULL,
+	[ResidualLikelihoodJustification] [nvarchar](max) NULL,
+	[ResidualFinancialJustification] [nvarchar](max) NULL,
+	[ResidualCustomerJustification] [nvarchar](max) NULL,
+	[ResidualRegulatoryJustification] [nvarchar](max) NULL,
+	[ResidualReputationalJustification] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Risk] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RiskAssessment]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RiskAssessment](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](max) NULL,
+	[PeriodStart] [datetime2](7) NOT NULL,
+	[PeriodEnd] [datetime2](7) NOT NULL,
+	[CreationUser] [nvarchar](max) NULL,
+	[CreationDate] [datetime2](7) NOT NULL,
+	[ModifiedUser] [nvarchar](max) NULL,
+	[ModifiedDate] [datetime2](7) NOT NULL,
+	[TaxonomyLevel1ID] [int] NULL,
+	[TaxonomyLevel2ID] [int] NULL,
+ CONSTRAINT [PK_RiskAssessment] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](250) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RolesLineOfDefense]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RolesLineOfDefense](
+	[RoleID] [int] NOT NULL,
+	[LineOfDefenseID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[RoleID] ASC,
+	[LineOfDefenseID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StatusRequest]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StatusRequest](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[TemplateName] [varchar](250) NOT NULL,
+	[TemplateLocation] [varchar](250) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_ObservationStatusRequest1] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SurveyAccessAdmin]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SurveyAccessAdmin](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[BNum] [varchar](6) NULL,
+	[IsAdmin] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SurveyAuditTrail]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SurveyAuditTrail](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[UserID] [varchar](10) NULL,
+	[Date] [datetime] NULL,
+	[QuestionID] [int] NULL,
+	[AUID] [int] NULL,
+	[AnswerValue] [nvarchar](max) NULL,
+	[QuestionnaireId] [int] NULL,
+	[AnswerIndex] [nvarchar](400) NULL,
+	[ProductPart] [nvarchar](400) NULL,
+	[AnswerAction] [int] NULL,
+ CONSTRAINT [PK_SurveyAuditTrail] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Surveys]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Surveys](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](150) NOT NULL,
+	[Description] [nvarchar](150) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+ CONSTRAINT [PK_Survey] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Taxonomies]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Taxonomies](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](200) NULL,
+	[Description] [nvarchar](500) NULL,
+	[IsActive] [bit] NOT NULL,
+	[LevelID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TaxonomiesRelations]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TaxonomiesRelations](
+	[TaxonomyID] [int] NOT NULL,
+	[TaxonomySubLevelID] [int] NOT NULL,
+	[IsActive] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[TaxonomyID] ASC,
+	[TaxonomySubLevelID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TaxonomyLevels]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TaxonomyLevels](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Level] [int] NOT NULL,
+	[Name] [nvarchar](150) NOT NULL,
+	[IsActive] [bit] NOT NULL,
+	[IsMandatory] [bit] NULL,
+ CONSTRAINT [PK_TaxonomyLevels1] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserStatus]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserStatus](
+	[Bnum] [varchar](6) NOT NULL,
+	[IsValid] [bit] NULL,
+	[Name] [nvarchar](50) NULL,
+	[ModifiedDate] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Bnum] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_AttachedControl_ControlID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_AttachedControl_ControlID] ON [dbo].[AttachedControl]
+(
+	[ControlID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_AttachedControl_OverallRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_AttachedControl_OverallRatingID] ON [dbo].[AttachedControl]
+(
+	[OverallRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_AttachedControl_RiskID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_AttachedControl_RiskID] ON [dbo].[AttachedControl]
+(
+	[RiskID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_AuditTrail_ObservationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_AuditTrail_ObservationID] ON [dbo].[AuditTrail]
+(
+	[ObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Observation_BusinessUnitID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Observation_BusinessUnitID] ON [dbo].[Observation]
+(
+	[BusinessUnitID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Observation_GroupObservationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Observation_GroupObservationID] ON [dbo].[Observation]
+(
+	[GroupObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Observation_ObservationCategoryID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Observation_ObservationCategoryID] ON [dbo].[Observation]
+(
+	[CategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Observation_RiskAssessmentID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Observation_RiskAssessmentID] ON [dbo].[Observation]
+(
+	[RiskAssessmentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [test1]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE UNIQUE NONCLUSTERED INDEX [test1] ON [dbo].[Observation]
+(
+	[ID] ASC,
+	[Title] ASC,
+	[BusinessUnitID] ASC,
+	[CategoryID] ASC,
+	[GradeID] ASC,
+	[RiskOwner] ASC,
+	[StatusID] ASC,
+	[RAGStatusID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationActions_BusinessAreaID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationActions_BusinessAreaID] ON [dbo].[ObservationActions]
+(
+	[BusinessAreaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationActions_ObservationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationActions_ObservationID] ON [dbo].[ObservationActions]
+(
+	[ObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationBusinessAreas_BusinessAreaID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationBusinessAreas_BusinessAreaID] ON [dbo].[ObservationBusinessAreas]
+(
+	[BusinessAreaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationBusinessAreas_ObservationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationBusinessAreas_ObservationID] ON [dbo].[ObservationBusinessAreas]
+(
+	[ObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationCountries_CountryID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationCountries_CountryID] ON [dbo].[ObservationCountries]
+(
+	[CountryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationCountries_ObservationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationCountries_ObservationID] ON [dbo].[ObservationCountries]
+(
+	[ObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationFiles_ObservationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationFiles_ObservationID] ON [dbo].[ObservationFiles]
+(
+	[ObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationRegCategories_ObservationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationRegCategories_ObservationID] ON [dbo].[ObservationRegCategories]
+(
+	[ObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationRegCategories_RegulatoryCategoryID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationRegCategories_RegulatoryCategoryID] ON [dbo].[ObservationRegCategories]
+(
+	[RegulatoryCategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationRegulations_ObservationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationRegulations_ObservationID] ON [dbo].[ObservationRegulations]
+(
+	[ObservationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_ObservationRegulations_RegulationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_ObservationRegulations_RegulationID] ON [dbo].[ObservationRegulations]
+(
+	[RegulationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_BusinessAreaID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_BusinessAreaID] ON [dbo].[Risk]
+(
+	[BusinessAreaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_CountryID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_CountryID] ON [dbo].[Risk]
+(
+	[CountryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_CustomerImpactRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_CustomerImpactRatingID] ON [dbo].[Risk]
+(
+	[CustomerImpactRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_FinancialImpactRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_FinancialImpactRatingID] ON [dbo].[Risk]
+(
+	[FinancialImpactRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_LikelihoodRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_LikelihoodRatingID] ON [dbo].[Risk]
+(
+	[LikelihoodRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_RegulationID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_RegulationID] ON [dbo].[Risk]
+(
+	[RegulationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_RegulatoryCategoryID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_RegulatoryCategoryID] ON [dbo].[Risk]
+(
+	[RegulatoryCategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_RegulatoryImpactRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_RegulatoryImpactRatingID] ON [dbo].[Risk]
+(
+	[RegulatoryImpactRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_ReputationalImpactRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_ReputationalImpactRatingID] ON [dbo].[Risk]
+(
+	[ReputationalImpactRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_ResidualCustomerImpactRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_ResidualCustomerImpactRatingID] ON [dbo].[Risk]
+(
+	[ResidualCustomerImpactRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_ResidualFinancialImpactRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_ResidualFinancialImpactRatingID] ON [dbo].[Risk]
+(
+	[ResidualFinancialImpactRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_ResidualLikelihoodRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_ResidualLikelihoodRatingID] ON [dbo].[Risk]
+(
+	[ResidualLikelihoodRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_ResidualRegulatoryImpactRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_ResidualRegulatoryImpactRatingID] ON [dbo].[Risk]
+(
+	[ResidualRegulatoryImpactRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_ResidualReputationalImpactRatingID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_ResidualReputationalImpactRatingID] ON [dbo].[Risk]
+(
+	[ResidualReputationalImpactRatingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_RiskAssessmentID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_RiskAssessmentID] ON [dbo].[Risk]
+(
+	[RiskAssessmentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Risk_TaxonomyLevel3ID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_Risk_TaxonomyLevel3ID] ON [dbo].[Risk]
+(
+	[TaxonomyLevel3ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_RiskAssessment_TaxonomyLevel1ID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_RiskAssessment_TaxonomyLevel1ID] ON [dbo].[RiskAssessment]
+(
+	[TaxonomyLevel1ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_RiskAssessment_TaxonomyLevel2ID]    Script Date: 2023-09-28 15:36:08 ******/
+CREATE NONCLUSTERED INDEX [IX_RiskAssessment_TaxonomyLevel2ID] ON [dbo].[RiskAssessment]
+(
+	[TaxonomyLevel2ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[AuthorizationAccessPermissions] ADD  DEFAULT ((0)) FOR [ApproverAccess]
+GO
+ALTER TABLE [dbo].[AuthorizationAccessPermissions] ADD  DEFAULT ((0)) FOR [AdminAccess]
+GO
+ALTER TABLE [dbo].[AuthorizationBusinessAreas] ADD  DEFAULT ((0)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[AuthorizationBusinessUnits] ADD  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[AuthorizationLegalEntities] ADD  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[BusinessAreaToBusinessUnit] ADD  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[LegalEntityToBusinessUnit] ADD  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[ObservationCategory] ADD  DEFAULT ((0)) FOR [isActive]
+GO
+ALTER TABLE [dbo].[ObservationCategory] ADD  DEFAULT ((0)) FOR [HasComment]
+GO
+ALTER TABLE [dbo].[ObservationFiles] ADD  DEFAULT ((0)) FOR [GDPR]
+GO
+ALTER TABLE [dbo].[ParentTriggers] ADD  DEFAULT ((0)) FOR [HasComment]
+GO
+ALTER TABLE [dbo].[Questions] ADD  DEFAULT ((0)) FOR [Sort]
+GO
+ALTER TABLE [dbo].[Questions] ADD  DEFAULT ((0)) FOR [AllowAddRemRows]
+GO
+ALTER TABLE [dbo].[Questions] ADD  DEFAULT ('horizontal') FOR [ColOrientation]
+GO
+ALTER TABLE [dbo].[Questions] ADD  DEFAULT ((1)) FOR [NestedParentID]
+GO
+ALTER TABLE [dbo].[Questions] ADD  DEFAULT ('') FOR [CommentText]
+GO
+ALTER TABLE [dbo].[QuestionsTest] ADD  DEFAULT ((0)) FOR [Sort]
+GO
+ALTER TABLE [dbo].[QuestionsTest] ADD  DEFAULT ((0)) FOR [AllowAddRemRows]
+GO
+ALTER TABLE [dbo].[QuestionsTest] ADD  DEFAULT ('horizontal') FOR [ColOrientation]
+GO
+ALTER TABLE [dbo].[QuestionsTest] ADD  DEFAULT ((1)) FOR [NestedParentID]
+GO
+ALTER TABLE [dbo].[QuestionsTest] ADD  DEFAULT ('') FOR [CommentText]
+GO
+ALTER TABLE [dbo].[RAGStatus] ADD  DEFAULT ('') FOR [Color]
+GO
+ALTER TABLE [dbo].[RAGStatus] ADD  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[StatusRequest] ADD  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[Taxonomies] ADD  DEFAULT ('1') FOR [LevelID]
+GO
+ALTER TABLE [dbo].[TaxonomiesRelations] ADD  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[UserStatus] ADD  DEFAULT ((0)) FOR [IsValid]
+GO
+ALTER TABLE [dbo].[AssessmentUnitSurveys]  WITH CHECK ADD  CONSTRAINT [FK_AssessmentUnitSurveys_AssessmentUnit] FOREIGN KEY([AssessmentUnitID])
+REFERENCES [dbo].[AssessmentUnit] ([AUID])
+GO
+ALTER TABLE [dbo].[AssessmentUnitSurveys] CHECK CONSTRAINT [FK_AssessmentUnitSurveys_AssessmentUnit]
+GO
+ALTER TABLE [dbo].[AssessmentUnitSurveys]  WITH CHECK ADD  CONSTRAINT [FK_AssessmentUnitSurveys_Questionnaires] FOREIGN KEY([SurveyID])
+REFERENCES [dbo].[Questionnaires] ([QuestionnaireID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AssessmentUnitSurveys] CHECK CONSTRAINT [FK_AssessmentUnitSurveys_Questionnaires]
+GO
+ALTER TABLE [dbo].[AttachedControl]  WITH CHECK ADD  CONSTRAINT [FK_AttachedControl_Control_ControlID] FOREIGN KEY([ControlID])
+REFERENCES [dbo].[Control] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AttachedControl] CHECK CONSTRAINT [FK_AttachedControl_Control_ControlID]
+GO
+ALTER TABLE [dbo].[AttachedControl]  WITH CHECK ADD  CONSTRAINT [FK_AttachedControl_ControlRating_OverallRatingID] FOREIGN KEY([OverallRatingID])
+REFERENCES [dbo].[ControlRating] ([ID])
+GO
+ALTER TABLE [dbo].[AttachedControl] CHECK CONSTRAINT [FK_AttachedControl_ControlRating_OverallRatingID]
+GO
+ALTER TABLE [dbo].[AttachedControl]  WITH CHECK ADD  CONSTRAINT [FK_AttachedControl_Risk_RiskID] FOREIGN KEY([RiskID])
+REFERENCES [dbo].[Risk] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[AttachedControl] CHECK CONSTRAINT [FK_AttachedControl_Risk_RiskID]
+GO
+ALTER TABLE [dbo].[AuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_AuditTrail_Observation_ObservationID] FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+GO
+ALTER TABLE [dbo].[AuditTrail] CHECK CONSTRAINT [FK_AuditTrail_Observation_ObservationID]
+GO
+ALTER TABLE [dbo].[Authorisation]  WITH CHECK ADD FOREIGN KEY([BusinessUnitID])
+REFERENCES [dbo].[BusinessUnit] ([ID])
+GO
+ALTER TABLE [dbo].[AuthorizationAccessPermissions]  WITH CHECK ADD  CONSTRAINT [FK_RoleAccessPermissions_Roles] FOREIGN KEY([AuthorizationID])
+REFERENCES [dbo].[Authorizations] ([ID])
+GO
+ALTER TABLE [dbo].[AuthorizationAccessPermissions] CHECK CONSTRAINT [FK_RoleAccessPermissions_Roles]
+GO
+ALTER TABLE [dbo].[Observation]  WITH CHECK ADD FOREIGN KEY([RAGStatusID])
+REFERENCES [dbo].[RAGStatus] ([ID])
+GO
+ALTER TABLE [dbo].[Observation]  WITH CHECK ADD  CONSTRAINT [FK_Observation_BusinessUnit_BusinessUnitID] FOREIGN KEY([BusinessUnitID])
+REFERENCES [dbo].[BusinessUnit] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Observation] CHECK CONSTRAINT [FK_Observation_BusinessUnit_BusinessUnitID]
+GO
+ALTER TABLE [dbo].[Observation]  WITH CHECK ADD  CONSTRAINT [FK_Observation_Observation_GroupObservationID] FOREIGN KEY([GroupObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+GO
+ALTER TABLE [dbo].[Observation] CHECK CONSTRAINT [FK_Observation_Observation_GroupObservationID]
+GO
+ALTER TABLE [dbo].[Observation]  WITH CHECK ADD  CONSTRAINT [FK_Observation_ObservationCategory_ObservationCategoryID] FOREIGN KEY([CategoryID])
+REFERENCES [dbo].[ObservationCategory] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Observation] CHECK CONSTRAINT [FK_Observation_ObservationCategory_ObservationCategoryID]
+GO
+ALTER TABLE [dbo].[Observation]  WITH CHECK ADD  CONSTRAINT [FK_Observation_RiskAssessment_RiskAssessmentID] FOREIGN KEY([RiskAssessmentID])
+REFERENCES [dbo].[RiskAssessment] ([ID])
+GO
+ALTER TABLE [dbo].[Observation] CHECK CONSTRAINT [FK_Observation_RiskAssessment_RiskAssessmentID]
+GO
+ALTER TABLE [dbo].[ObservationActions]  WITH CHECK ADD  CONSTRAINT [FK_ObservationActions_Observation_ObservationID] FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ObservationActions] CHECK CONSTRAINT [FK_ObservationActions_Observation_ObservationID]
+GO
+ALTER TABLE [dbo].[ObservationActions]  WITH CHECK ADD  CONSTRAINT [FK_ObservationActions_Taxonomies] FOREIGN KEY([TaxonomyLevel3ID])
+REFERENCES [dbo].[Taxonomies] ([ID])
+GO
+ALTER TABLE [dbo].[ObservationActions] CHECK CONSTRAINT [FK_ObservationActions_Taxonomies]
+GO
+ALTER TABLE [dbo].[ObservationBusinessAreas]  WITH CHECK ADD FOREIGN KEY([CountryID])
+REFERENCES [dbo].[Country] ([ID])
+GO
+ALTER TABLE [dbo].[ObservationBusinessAreas]  WITH CHECK ADD  CONSTRAINT [FK_ObservationBusinessAreas_Observation_ObservationID] FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ObservationBusinessAreas] CHECK CONSTRAINT [FK_ObservationBusinessAreas_Observation_ObservationID]
+GO
+ALTER TABLE [dbo].[ObservationCategoryTest]  WITH CHECK ADD  CONSTRAINT [FK_ObservationCategoryTest_Observation] FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+GO
+ALTER TABLE [dbo].[ObservationCategoryTest] CHECK CONSTRAINT [FK_ObservationCategoryTest_Observation]
+GO
+ALTER TABLE [dbo].[ObservationCategoryTest]  WITH CHECK ADD  CONSTRAINT [FK_ObservationCategoryTest_ObservationCategory] FOREIGN KEY([CategoryID])
+REFERENCES [dbo].[ObservationCategory] ([ID])
+GO
+ALTER TABLE [dbo].[ObservationCategoryTest] CHECK CONSTRAINT [FK_ObservationCategoryTest_ObservationCategory]
+GO
+ALTER TABLE [dbo].[ObservationComment]  WITH CHECK ADD  CONSTRAINT [FK_ObservationComment1_LinesOfDefense] FOREIGN KEY([LineOfDefenceId])
+REFERENCES [dbo].[LinesOfDefense] ([ID])
+GO
+ALTER TABLE [dbo].[ObservationComment] CHECK CONSTRAINT [FK_ObservationComment1_LinesOfDefense]
+GO
+ALTER TABLE [dbo].[ObservationComment]  WITH CHECK ADD  CONSTRAINT [FK_ObservationComment1_Observation] FOREIGN KEY([ObservationId])
+REFERENCES [dbo].[Observation] ([ID])
+GO
+ALTER TABLE [dbo].[ObservationComment] CHECK CONSTRAINT [FK_ObservationComment1_Observation]
+GO
+ALTER TABLE [dbo].[ObservationCountries]  WITH CHECK ADD  CONSTRAINT [FK_ObservationCountries_Country_CountryID] FOREIGN KEY([CountryID])
+REFERENCES [dbo].[Country] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ObservationCountries] CHECK CONSTRAINT [FK_ObservationCountries_Country_CountryID]
+GO
+ALTER TABLE [dbo].[ObservationCountries]  WITH CHECK ADD  CONSTRAINT [FK_ObservationCountries_Observation_ObservationID] FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ObservationCountries] CHECK CONSTRAINT [FK_ObservationCountries_Observation_ObservationID]
+GO
+ALTER TABLE [dbo].[ObservationFiles]  WITH CHECK ADD  CONSTRAINT [FK_ObservationFiles_Observation_ObservationID] FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ObservationFiles] CHECK CONSTRAINT [FK_ObservationFiles_Observation_ObservationID]
+GO
+ALTER TABLE [dbo].[ObservationRAGStatusAuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_ObservationRAGStatus_Observation] FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+GO
+ALTER TABLE [dbo].[ObservationRAGStatusAuditTrail] CHECK CONSTRAINT [FK_ObservationRAGStatus_Observation]
+GO
+ALTER TABLE [dbo].[ObservationRAGStatusAuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_ObservationRAGStatus_RAGStatus] FOREIGN KEY([PreviousRAGStatusID])
+REFERENCES [dbo].[RAGStatus] ([ID])
+GO
+ALTER TABLE [dbo].[ObservationRAGStatusAuditTrail] CHECK CONSTRAINT [FK_ObservationRAGStatus_RAGStatus]
+GO
+ALTER TABLE [dbo].[ObservationRAGStatusAuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_ObservationRAGStatus_RAGStatus1] FOREIGN KEY([NewRAGStatusID])
+REFERENCES [dbo].[RAGStatus] ([ID])
+GO
+ALTER TABLE [dbo].[ObservationRAGStatusAuditTrail] CHECK CONSTRAINT [FK_ObservationRAGStatus_RAGStatus1]
+GO
+ALTER TABLE [dbo].[ObservationRegCategories]  WITH CHECK ADD  CONSTRAINT [FK_ObservationRegCategories_Observation_ObservationID] FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ObservationRegCategories] CHECK CONSTRAINT [FK_ObservationRegCategories_Observation_ObservationID]
+GO
+ALTER TABLE [dbo].[ObservationRegCategories]  WITH CHECK ADD  CONSTRAINT [FK_ObservationRegCategories_RegulatoryCategory_RegulatoryCategoryID] FOREIGN KEY([RegulatoryCategoryID])
+REFERENCES [dbo].[RegulatoryCategory] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ObservationRegCategories] CHECK CONSTRAINT [FK_ObservationRegCategories_RegulatoryCategory_RegulatoryCategoryID]
+GO
+ALTER TABLE [dbo].[ObservationRegulations]  WITH CHECK ADD  CONSTRAINT [FK_ObservationRegulations_Observation_ObservationID] FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ObservationRegulations] CHECK CONSTRAINT [FK_ObservationRegulations_Observation_ObservationID]
+GO
+ALTER TABLE [dbo].[ObservationRegulations]  WITH CHECK ADD  CONSTRAINT [FK_ObservationRegulations_Regulation_RegulationID] FOREIGN KEY([RegulationID])
+REFERENCES [dbo].[Regulation] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[ObservationRegulations] CHECK CONSTRAINT [FK_ObservationRegulations_Regulation_RegulationID]
+GO
+ALTER TABLE [dbo].[ObservationTaxonomy]  WITH CHECK ADD FOREIGN KEY([ObservationID])
+REFERENCES [dbo].[Observation] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[PagesNewStruct]  WITH CHECK ADD  CONSTRAINT [FK_PagesNewStruct_Questionnaires] FOREIGN KEY([QuestionnaireID])
+REFERENCES [dbo].[Questionnaires] ([QuestionnaireID])
+GO
+ALTER TABLE [dbo].[PagesNewStruct] CHECK CONSTRAINT [FK_PagesNewStruct_Questionnaires]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_Country_CountryID] FOREIGN KEY([CountryID])
+REFERENCES [dbo].[Country] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_Country_CountryID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_ImpactRating_CustomerImpactRatingID] FOREIGN KEY([CustomerImpactRatingID])
+REFERENCES [dbo].[ImpactRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_ImpactRating_CustomerImpactRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_ImpactRating_FinancialImpactRatingID] FOREIGN KEY([FinancialImpactRatingID])
+REFERENCES [dbo].[ImpactRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_ImpactRating_FinancialImpactRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_ImpactRating_RegulatoryImpactRatingID] FOREIGN KEY([RegulatoryImpactRatingID])
+REFERENCES [dbo].[ImpactRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_ImpactRating_RegulatoryImpactRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_ImpactRating_ReputationalImpactRatingID] FOREIGN KEY([ReputationalImpactRatingID])
+REFERENCES [dbo].[ImpactRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_ImpactRating_ReputationalImpactRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_ImpactRating_ResidualCustomerImpactRatingID] FOREIGN KEY([ResidualCustomerImpactRatingID])
+REFERENCES [dbo].[ImpactRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_ImpactRating_ResidualCustomerImpactRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_ImpactRating_ResidualFinancialImpactRatingID] FOREIGN KEY([ResidualFinancialImpactRatingID])
+REFERENCES [dbo].[ImpactRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_ImpactRating_ResidualFinancialImpactRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_ImpactRating_ResidualRegulatoryImpactRatingID] FOREIGN KEY([ResidualRegulatoryImpactRatingID])
+REFERENCES [dbo].[ImpactRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_ImpactRating_ResidualRegulatoryImpactRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_ImpactRating_ResidualReputationalImpactRatingID] FOREIGN KEY([ResidualReputationalImpactRatingID])
+REFERENCES [dbo].[ImpactRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_ImpactRating_ResidualReputationalImpactRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_LikelihoodRating_LikelihoodRatingID] FOREIGN KEY([LikelihoodRatingID])
+REFERENCES [dbo].[LikelihoodRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_LikelihoodRating_LikelihoodRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_LikelihoodRating_ResidualLikelihoodRatingID] FOREIGN KEY([ResidualLikelihoodRatingID])
+REFERENCES [dbo].[LikelihoodRating] ([ID])
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_LikelihoodRating_ResidualLikelihoodRatingID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_Regulation_RegulationID] FOREIGN KEY([RegulationID])
+REFERENCES [dbo].[Regulation] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_Regulation_RegulationID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_RegulatoryCategory_RegulatoryCategoryID] FOREIGN KEY([RegulatoryCategoryID])
+REFERENCES [dbo].[RegulatoryCategory] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_RegulatoryCategory_RegulatoryCategoryID]
+GO
+ALTER TABLE [dbo].[Risk]  WITH CHECK ADD  CONSTRAINT [FK_Risk_RiskAssessment_RiskAssessmentID] FOREIGN KEY([RiskAssessmentID])
+REFERENCES [dbo].[RiskAssessment] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Risk] CHECK CONSTRAINT [FK_Risk_RiskAssessment_RiskAssessmentID]
+GO
+ALTER TABLE [dbo].[RolesLineOfDefense]  WITH CHECK ADD FOREIGN KEY([LineOfDefenseID])
+REFERENCES [dbo].[LinesOfDefense] ([ID])
+GO
+ALTER TABLE [dbo].[RolesLineOfDefense]  WITH CHECK ADD FOREIGN KEY([RoleID])
+REFERENCES [dbo].[Roles] ([ID])
+GO
+ALTER TABLE [dbo].[SurveyUsersAccess]  WITH CHECK ADD  CONSTRAINT [FK_SurveyUsersAccess_AssessmentUnitSurveys] FOREIGN KEY([AssessmentUnitSurveyID])
+REFERENCES [dbo].[AssessmentUnitSurveys] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[SurveyUsersAccess] CHECK CONSTRAINT [FK_SurveyUsersAccess_AssessmentUnitSurveys]
+GO
+ALTER TABLE [dbo].[Taxonomies]  WITH CHECK ADD  CONSTRAINT [FK_Taxonomies_TaxonomyLevels] FOREIGN KEY([LevelID])
+REFERENCES [dbo].[TaxonomyLevels] ([ID])
+GO
+ALTER TABLE [dbo].[Taxonomies] CHECK CONSTRAINT [FK_Taxonomies_TaxonomyLevels]
+GO
+/****** Object:  StoredProcedure [dbo].[users_activity_check]    Script Date: 2023-09-28 15:36:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ 
+
+
+CREATE Procedure [dbo].[users_activity_check]
+
+ 
+
+AS
+
+ 
+
+---->PREP
+DECLARE @ldapquery VARCHAR(100)
+DECLARE @userBnum VARCHAR(6)
+
+ 
+
+DECLARE @OPENQUERY nvarchar(4000)
+DECLARE @OPENQUERY_PRE nvarchar(4000)
+DECLARE @OPENQUERY_POST nvarchar(4000) 
+
+ 
+
+SET @OPENQUERY_PRE = 'INSERT INTO UserStatus (Bnum, IsValid, Name, ModifiedDate)  SELECT name,CAST(
+             CASE
+				WHEN title is NULL
+                    THEN 0
+    				ELSE 1
+				
+             END AS bit) as IsValid,displayname,GetDate() asModifiedDate  FROM OpenQuery (ADSI,'
+
+ 
+
+ 
+
+---->Cleaning-up before run
+    Truncate table UserStatus
+---->
+
+ 
+
+DECLARE  @tempUSERS TABLE (Bnum varchar(6))
+
+ 
+
+
+INSERT INTO @tempUSERS (Bnum)
+SELECT Assignee AS name FROM Observation  where LEN(Assignee)=6
+UNION 
+SELECT RiskOwner AS name FROM Observation  where LEN(RiskOwner)=6
+UNION 
+SELECT ActivityOwner AS name FROM Observation  where LEN(ActivityOwner)=6
+UNION 
+SELECT Comment1LODUser AS name FROM Observation  where LEN(Comment1LODUser)=6
+UNION 
+SELECT CreationUser AS name FROM Observation  where LEN(CreationUser)=6
+UNION 
+SELECT closureUser AS name FROM Observation  where LEN(closureUser)=6
+UNION 
+SELECT ModifiedUser AS name FROM Observation  where LEN(ModifiedUser)=6
+UNION 
+SELECT CreationUser AS name FROM ObservationActions  where LEN(CreationUser)=6
+UNION 
+SELECT ModifiedUser AS name FROM ObservationActions  where LEN(ModifiedUser)=6
+UNION 
+SELECT ClosureUser AS name FROM ObservationActions  where LEN(ClosureUser)=6
+UNION 
+SELECT ActivityOwner AS name FROM ObservationActions  where LEN(ActivityOwner)=6
+UNION
+SELECT Assignee AS name FROM ObservationActions   where LEN(Assignee)=6
+
+ 
+
+--SELECT DISTINCT AuditUser FROM AuditTrail WHERE AuditDate > DATEADD(year, -1,GETDATE())  and AuditUser is not NULL
+
+ 
+
+select * from @tempUSERS
+
+ 
+
+WHILE((SELECT COUNT(1) FROM @tempUSERS) > 0)
+BEGIN
+SET @userBnum = (Select top 1 Bnum from @tempUSERS)
+SET @ldapquery = '''<LDAP://danskenet.net>;(&(cn=' + @userBnum + '));name,displayname,title;subtree'')'
+SET @OPENQUERY = @OPENQUERY_PRE + @ldapquery
+EXEC (@OPENQUERY) 
+DELETE FROM @tempUSERS where Bnum=@userBnum
+
+ 
+
+  END
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
+Begin DesignProperties = 
+   Begin PaneConfigurations = 
+      Begin PaneConfiguration = 0
+         NumPanes = 4
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+      End
+      Begin PaneConfiguration = 1
+         NumPanes = 3
+         Configuration = "(H (1 [50] 4 [25] 3))"
+      End
+      Begin PaneConfiguration = 2
+         NumPanes = 3
+         Configuration = "(H (1 [50] 2 [25] 3))"
+      End
+      Begin PaneConfiguration = 3
+         NumPanes = 3
+         Configuration = "(H (4 [30] 2 [40] 3))"
+      End
+      Begin PaneConfiguration = 4
+         NumPanes = 2
+         Configuration = "(H (1 [56] 3))"
+      End
+      Begin PaneConfiguration = 5
+         NumPanes = 2
+         Configuration = "(H (2 [66] 3))"
+      End
+      Begin PaneConfiguration = 6
+         NumPanes = 2
+         Configuration = "(H (4 [50] 3))"
+      End
+      Begin PaneConfiguration = 7
+         NumPanes = 1
+         Configuration = "(V (3))"
+      End
+      Begin PaneConfiguration = 8
+         NumPanes = 3
+         Configuration = "(H (1[56] 4[18] 2) )"
+      End
+      Begin PaneConfiguration = 9
+         NumPanes = 2
+         Configuration = "(H (1 [75] 4))"
+      End
+      Begin PaneConfiguration = 10
+         NumPanes = 2
+         Configuration = "(H (1[66] 2) )"
+      End
+      Begin PaneConfiguration = 11
+         NumPanes = 2
+         Configuration = "(H (4 [60] 2))"
+      End
+      Begin PaneConfiguration = 12
+         NumPanes = 1
+         Configuration = "(H (1) )"
+      End
+      Begin PaneConfiguration = 13
+         NumPanes = 1
+         Configuration = "(V (4))"
+      End
+      Begin PaneConfiguration = 14
+         NumPanes = 1
+         Configuration = "(V (2))"
+      End
+      ActivePaneConfig = 0
+   End
+   Begin DiagramPane = 
+      Begin Origin = 
+         Top = 0
+         Left = 0
+      End
+      Begin Tables = 
+         Begin Table = "AssessmentUnit"
+            Begin Extent = 
+               Top = 179
+               Left = 21
+               Bottom = 309
+               Right = 191
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "AssessmentUnitSurveys"
+            Begin Extent = 
+               Top = 166
+               Left = 241
+               Bottom = 296
+               Right = 425
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Questionnaires"
+            Begin Extent = 
+               Top = 172
+               Left = 545
+               Bottom = 285
+               Right = 719
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "SurveyUsersAccess"
+            Begin Extent = 
+               Top = 9
+               Left = 257
+               Bottom = 105
+               Right = 476
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "SurveyUsers"
+            Begin Extent = 
+               Top = 8
+               Left = 16
+               Bottom = 104
+               Right = 186
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+      End
+   End
+   Begin SQLPane = 
+   End
+   Begin DataPane = 
+      Begin ParameterDefaults = ""
+      End
+   End
+   Begin CriteriaPane = 
+      Begin ColumnWidths = 11
+         Column = 1440
+         Alias = 900
+         Table = 1170
+         Output = 720
+         Append = 1400
+         NewValue = 1170
+         SortType = 1350
+         SortOrder = 1410
+         GroupBy = 1350
+         Filter = 1350
+         Or = 1' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'SurveyUserAccessWorkFlow'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane2', @value=N'350
+         Or = 1350
+         Or = 1350
+      End
+   End
+End
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'SurveyUserAccessWorkFlow'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=2 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'SurveyUserAccessWorkFlow'
+GO
+USE [master]
+GO
+ALTER DATABASE [RiskManagement_Latest] SET  READ_WRITE 
+GO
+
